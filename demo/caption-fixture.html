@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Caption Fixture</title>
+    <style>
+      body {
+        margin: 0;
+        color: #f8fafc;
+        background: #111827;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        display: grid;
+        min-height: 100vh;
+        place-items: center;
+        padding: 32px;
+      }
+
+      .player {
+        position: relative;
+        width: min(960px, 100%);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(37, 99, 235, 0.35), transparent),
+          radial-gradient(circle at 70% 30%, rgba(248, 250, 252, 0.16), transparent 35%),
+          #020617;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      }
+
+      .player::before {
+        content: "Demo video surface";
+        position: absolute;
+        left: 24px;
+        top: 20px;
+        color: rgba(248, 250, 252, 0.72);
+        font-size: 14px;
+        letter-spacing: 0.02em;
+      }
+
+      .player-timedtext-text-container {
+        position: absolute;
+        left: 50%;
+        bottom: 72px;
+        transform: translateX(-50%);
+        max-width: 78%;
+        padding: 8px 14px;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.78);
+        border-radius: 4px;
+        font-size: clamp(18px, 2vw, 28px);
+        font-weight: 700;
+        line-height: 1.36;
+        text-align: center;
+      }
+
+      .controls {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 6px;
+        padding: 10px 14px;
+        color: #111827;
+        background: #f8fafc;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .hint {
+        margin-top: 18px;
+        color: #cbd5e1;
+        font-size: 14px;
+      }
+
+      .checklist {
+        box-sizing: border-box;
+        width: min(960px, 100%);
+        margin-top: 22px;
+        padding: 18px 20px;
+        border: 1px solid rgba(203, 213, 225, 0.22);
+        border-radius: 8px;
+        background: rgba(15, 23, 42, 0.82);
+      }
+
+      .checklist h1 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+
+      .checklist ol {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 20px;
+        color: #e2e8f0;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      code {
+        display: block;
+        margin-top: 10px;
+        padding: 10px 12px;
+        overflow-x: auto;
+        border-radius: 6px;
+        color: #dbeafe;
+        background: #020617;
+        font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <div class="player">
+          <div class="player-timedtext-text-container" data-uia="player-subtitle">
+            How can we use computers to do our jobs better?
+          </div>
+          <div class="controls">
+            <button id="toggle" type="button">Pause</button>
+            <span>Fake Netflix-style rendered subtitle DOM</span>
+          </div>
+        </div>
+        <p class="hint">
+          Load the unpacked extension, serve this folder over localhost, and the transcript overlay should appear after the first subtitle change.
+        </p>
+        <div class="checklist">
+          <h1>Manual extension check</h1>
+          <ol>
+            <li>Load this repository with Chrome Developer mode and Load unpacked.</li>
+            <li>Wait for at least two subtitle changes. A Live Transcript overlay should appear in the lower-right corner.</li>
+            <li>Open the extension popup. It should report collected transcript lines.</li>
+            <li>Use Copy TXT or Download SRT from the popup and confirm the exported text includes the cycling subtitle lines.</li>
+            <li>Use Clear Current Transcript. The overlay should disappear until the next subtitle change.</li>
+          </ol>
+          <code>(() => {
+  const overlay = document.querySelector('#rvt-overlay');
+  return {
+    contentScriptLoaded: Boolean(window.__realtimeVideoTranscriberLoaded),
+    overlayVisible: Boolean(overlay && !overlay.hidden),
+    transcriptLines: Array.from(overlay?.querySelectorAll('.rvt-text') || []).map((node) => node.textContent)
+  };
+})()</code>
+        </div>
+      </section>
+    </main>
+    <script>
+      const lines = [
+        'How can we use computers to do our jobs better?',
+        'The generation before us had no computers.',
+        'My generation was the first generation that had to ask the question,',
+        'how do I use computers to do my job better?',
+        'Remember, I came into the industry when computers were just becoming common.'
+      ];
+
+      const subtitle = document.querySelector('.player-timedtext-text-container');
+      const toggle = document.querySelector('#toggle');
+      let index = 0;
+      let playing = true;
+
+      window.setInterval(() => {
+        if (!playing) return;
+        index = (index + 1) % lines.length;
+        subtitle.textContent = lines[index];
+      }, 2200);
+
+      toggle.addEventListener('click', () => {
+        playing = !playing;
+        toggle.textContent = playing ? 'Pause' : 'Play';
+      });
+    </script>
+  </body>
+</html>

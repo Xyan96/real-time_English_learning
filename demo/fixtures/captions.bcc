@@ -1,0 +1,19 @@
+{
+  "font_size": 0.4,
+  "font_color": "#FFFFFF",
+  "background_alpha": 0.5,
+  "body": [
+    {
+      "from": 1.0,
+      "to": 3.5,
+      "location": 2,
+      "content": "BCC network subtitle from fetched page resource."
+    },
+    {
+      "from": 4.0,
+      "to": 6.0,
+      "location": 2,
+      "content": "Second BCC subtitle line."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xmlns="http://www.w3.org/ns/ttml" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" ttp:timeBase="media" ttp:tickRate="10000000" ttp:frameRate="30" ttp:frameRateMultiplier="1000 1001">
+  <body>
+    <div>
+      <p begin="20000000t" end="45000000t">
+        <span>Netflix-like TTML </span><span>subtitle from page fetch.</span>
+      </p>
+      <p begin="00:00:05:15" dur="30f">
+        <span>Frame multiplier cue.</span>
+      </p>
+    </div>
+  </body>
+</tt>

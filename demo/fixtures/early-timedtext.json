@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "tStartMs": 500,
+      "dDurationMs": 5000,
+      "segs": [
+        {
+          "utf8": "Early network JSON "
+        },
+        {
+          "utf8": "subtitle from head fetch."
+        }
+      ]
+    }
+  ]
+}

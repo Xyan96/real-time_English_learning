@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Polygon subtitle icon option 1">
+  <rect width="128" height="128" rx="28" fill="#1D4ED8"/>
+  <polygon points="64 20 101 42 101 86 64 108 27 86 27 42" fill="#0F172A"/>
+  <polygon points="47 43 47 85 84 64" fill="#FACC15"/>
+  <rect x="33" y="78" width="62" height="9" rx="4.5" fill="#FACC15"/>
+  <rect x="43" y="94" width="42" height="8" rx="4" fill="#FACC15"/>
+</svg>

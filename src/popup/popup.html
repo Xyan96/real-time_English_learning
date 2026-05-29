@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>实时字幕英语学习助手</title>
+    <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+    <main>
+      <header class="popup-header">
+        <div>
+          <h1>实时字幕英语学习助手</h1>
+          <p>自动读取网页字幕，实时高亮高价值学习项。</p>
+        </div>
+        <label class="switch-row main-switch">
+          <span>启用</span>
+          <input id="enabled" type="checkbox">
+        </label>
+      </header>
+
+      <section class="panel">
+        <label>
+          英语水平
+          <select id="englishLevel">
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+          </select>
+        </label>
+        <div class="switch-grid" aria-label="学习项偏好">
+          <label class="switch-row">
+            <span>专有名词</span>
+            <input id="includeProperNouns" type="checkbox">
+          </label>
+          <label class="switch-row">
+            <span>技术模式</span>
+            <input id="technicalMode" type="checkbox">
+          </label>
+          <label class="switch-row">
+            <span>界面术语</span>
+            <input id="includeUiTerms" type="checkbox">
+          </label>
+        </div>
+        <div class="intensity-control" aria-label="提取强度">
+          <div class="intensity-heading">
+            <label for="extractionIntensity">Extraction Intensity</label>
+            <strong id="extractionIntensityValue">50</strong>
+          </div>
+          <div class="intensity-slider-row">
+            <span>少</span>
+            <input id="extractionIntensity" type="range" min="0" max="100" step="1">
+            <span>多</span>
+          </div>
+          <div id="extractionModeSummary" class="intensity-summary" aria-live="polite">
+            当前模式：平衡 · 实时显示：每行最多 2 个 · 后台导出：每行最多 4 个
+          </div>
+        </div>
+      </section>
+
+      <section class="primary-actions">
+        <button id="auto" type="button">开始自动学习</button>
+        <button id="exportObsidian" type="button">导出到 Obsidian</button>
+        <button id="reviewKnown" class="secondary" type="button">整理已掌握</button>
+      </section>
+
+      <label>
+        Obsidian 仓库路径
+        <input id="obsidianVaultPath" type="text" placeholder="/Users/you/Documents/ObsidianVault">
+      </label>
+      <label>
+        Obsidian 子文件夹
+        <input id="obsidianSubdir" type="text" placeholder="英语观看记录">
+      </label>
+
+      <details class="advanced-panel">
+        <summary>高级设置与工具</summary>
+        <div class="advanced-content">
+          <label>
+            学习项分析接口
+            <input id="analysisEndpoint" type="url" placeholder="http://localhost:8787/analyze">
+          </label>
+          <label>
+            Obsidian 导出接口
+            <input id="obsidianExportEndpoint" type="url" placeholder="http://localhost:8787/obsidian/export">
+          </label>
+          <label>
+            OpenAI API 密钥
+            <input id="openAiApiKey" type="password" autocomplete="off" placeholder="sk-...">
+          </label>
+          <div class="actions">
+            <button id="analyze" class="secondary" type="button">分析当前字幕</button>
+          </div>
+          <div class="actions">
+            <button id="startLocalService" class="secondary" type="button">启动本地服务</button>
+            <button id="stopLocalService" class="secondary" type="button">关闭本地服务</button>
+          </div>
+          <div class="actions">
+            <button id="copy" class="secondary" type="button">复制 TXT</button>
+            <button id="download" class="secondary" type="button">下载 SRT</button>
+          </div>
+          <div class="actions">
+            <button id="copyHighlights" class="secondary" type="button">复制学习项 Markdown</button>
+            <button id="diagnostics" class="secondary" type="button">复制诊断信息</button>
+          </div>
+        </div>
+      </details>
+
+      <section id="knownReview" class="review-panel" hidden>
+        <div class="review-heading">
+          <strong>已掌握学习项</strong>
+          <button id="closeKnownReview" class="secondary small" type="button">关闭</button>
+        </div>
+        <div id="knownReviewList" class="review-list"></div>
+        <button id="addKnownHighlights" type="button">把选中项标为已掌握</button>
+      </section>
+      <button id="clear" class="secondary" type="button">清空当前字幕记录</button>
+      <p id="status">会自动读取网页字幕，并实时高亮学习项。</p>
+    </main>
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>

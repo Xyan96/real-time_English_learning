@@ -1,0 +1,10 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:03.000
+This line comes from a WebVTT track file.
+
+00:00:03.500 --> 00:00:06.000
+The page does not render subtitle DOM for this cue.
+
+00:00:06.500 --> 00:00:09.000
+The extension reads the site's existing subtitle asset.

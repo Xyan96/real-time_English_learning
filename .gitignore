@@ -1,0 +1,7 @@
+.DS_Store
+.env
+.env.*
+*.env
+dist/
+real-site-report.json
+real-site-youtube-report.json

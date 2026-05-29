@@ -1,0 +1,7 @@
+[Script Info]
+Title: ASS network fixture
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.00,0:00:03.50,Default,,0,0,0,,{\an8}ASS network subtitle from fetched page resource.
+Dialogue: 0,0:00:04.00,0:00:06.00,Default,,0,0,0,,Second\NASS subtitle line.

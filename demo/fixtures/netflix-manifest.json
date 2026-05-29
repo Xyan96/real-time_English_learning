@@ -1,0 +1,24 @@
+{
+  "videoTracks": [
+    {
+      "urls": [
+        {
+          "url": "video/segment-001.m4s"
+        }
+      ]
+    }
+  ],
+  "timedtexttracks": [
+    {
+      "language": "en",
+      "trackType": "PRIMARY",
+      "ttDownloadables": {
+        "dfxp-ls-sdh": {
+          "downloadUrls": {
+            "en": "timedtext?id=netflix-manifest-subtitle"
+          }
+        }
+      }
+    }
+  ]
+}

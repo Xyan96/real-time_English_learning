@@ -1,0 +1,14 @@
+{
+  "name": "realtime-video-transcriber-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "package:extension": "node tools/packageExtension.js",
+    "smoke:chrome": "node tools/chromeSmoke.js",
+    "validate:extension": "node tools/validateExtension.js",
+    "install-native-host": "node tools/installNativeHost.js",
+    "transcribe-server": "node server/transcriptionServer.js"
+  }
+}

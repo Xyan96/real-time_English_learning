@@ -1,0 +1,13 @@
+{
+  "captions": [
+    {
+      "startOffsetMs": 2000,
+      "endOffsetMs": 4200,
+      "words": [
+        { "word": "Offset " },
+        { "word": "JSON " },
+        { "text": "subtitle from page fetch." }
+      ]
+    }
+  ]
+}

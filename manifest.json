@@ -1,0 +1,90 @@
+{
+  "manifest_version": 3,
+  "name": "实时字幕英语学习助手",
+  "description": "优先读取视频网站网页字幕，并自动抽取高价值英语学习项。",
+  "version": "0.1.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsDUDzlL8IHq/GtfgaEmS9/6lsQdU6gRmba+/KSt32POBJi8mqgeHr4wJc5iE9jXMBERUs0DiXgCqa4EL+b3SkiIGUnmtWuJz5DfaEAsQXutYL9c9G8xpI/VeaKk8zZENpJLmPWBoJs5e6cyEJUFme1E2FM24AhU/ObhVrRsAPd3C7zTlB7K9sFV9EJLfdH87nA3K0TxR/16S+7k8m4H8eJYVSAojYgzwPtltVbOE6j67BnreYoj5PxV/PPa4xUbdkHIz5NtZcDcNEZmzMLh1SuvEyuStT/xBN5/pTwUKCHx5cCdgypRo1hOrnV1c91xVxaMkvAM02A9YTj1KHETtQIDAQAB",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "nativeMessaging",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/content/siteSubtitles.js",
+        "src/content/overlayMount.js",
+        "src/shared/segments.js",
+        "src/shared/transcriptExport.js",
+        "src/shared/learningAnalysis.js",
+        "src/shared/extractionIntensity.js",
+        "src/shared/learningRules.js",
+        "src/shared/subtitleCleaner.js",
+        "src/shared/extractor.js",
+        "src/shared/normalizer.js",
+        "src/shared/filters.js",
+        "src/shared/scorer.js",
+        "src/shared/deduper.js",
+        "src/shared/exporter.js",
+        "src/shared/subtitleDedup.js",
+        "src/shared/obsidianExport.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "src/background/serviceWorker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "启动实时字幕学习",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/pageSubtitleInterceptor.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_origin_as_fallback": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/contentScript.js"
+      ],
+      "css": [
+        "src/content/overlay.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_origin_as_fallback": true
+    }
+  ]
+}
